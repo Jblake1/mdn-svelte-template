@@ -62,32 +62,4 @@
   <!-- NewTodo -->
   <NewTodo autofocus on:addTodo={e => addTodo(e.detail)} />
 
-  <!-- Filter -->
-  <FilterButton bind:filter />
-
-  <!-- TodosStatus -->
-  <TodosStatus bind:this={todosStatus} {todos} />
-
-  <!-- Todos -->
-  <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
-  {#each filterTodos(filter, todos) as todo (todo.id)}
-    <li class="todo">
-      <Todo {todo}
-        on:update={e => updateTodo(e.detail)}
-        on:remove={e => removeTodo(e.detail)}
-      />
-    </li>
-  {:else}
-    <li>Nothing to do here!</li>
-  {/each}
-  </ul>
-
-  <hr />
-
-  <!-- MoreActions -->
-  <MoreActions {todos}
-    on:checkAll={e => checkAllTodos(e.detail)}
-    on:removeCompleted={removeCompletedTodos}
-  />
-
 </div>
