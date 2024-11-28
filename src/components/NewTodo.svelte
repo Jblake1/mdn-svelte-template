@@ -10,10 +10,19 @@
   let name = ''
   let nameEl: HTMLElement     // reference to the name input DOM node
 
-  const addTodo = () => {
-    dispatch('addTodo', name)
-    name = ''
-    nameEl.focus()            // give focus to the name input
+
+  let machine = ''
+  let machineEl: HTMLElement
+
+  let coffeeType = ''
+  let coffeeTypeEl: HTMLElement
+
+  let grinder = ''
+  let grinderEl: HTMLElement
+
+  const submit = () => {
+    // dispatch('addTodo', name)
+    console.log("machine",machine, "type", coffeeType, "grinder",grinder);
   }
 
   const onCancel = () => {
@@ -25,12 +34,26 @@
 
 </script>
 
-<form on:submit|preventDefault={addTodo} on:keydown={e => e.key === 'Escape' && onCancel()}>
+<form on:submit|preventDefault={submit} on:keydown={e => e.key === 'Escape' && onCancel()}>
   <h2 class="label-wrapper">
-    <label for="todo-0" class="label__lg">What needs to be done?</label>
+    <label for="machine" class="label__lg">Coffee Machine</label>
   </h2>
-  <input bind:value={name} bind:this={nameEl} use:selectOnFocus 
-    type="text" id="todo-0" autoComplete="off" class="input input__lg" 
+  <input bind:value={machine} bind:this={machineEl} use:selectOnFocus 
+    type="text" id="machine" autoComplete="off" class="input input__lg" 
   />
-  <button type="submit" disabled={!name} class="btn btn__primary btn__lg">Add</button>
+
+  <h2 class="label-wrapper">
+    <label for="coffeeType" class="label__lg">Coffee Type</label>
+  </h2>
+  <input bind:value={coffeeType} bind:this={coffeeTypeEl} use:selectOnFocus 
+    type="text" id="coffeeType" autoComplete="off" class="input input__lg" 
+  />
+
+  <h2 class="label-wrapper">
+    <label for="grinder" class="label__lg">Grinder Type</label>
+  </h2>
+  <input bind:value={grinder} bind:this={grinderEl} use:selectOnFocus 
+    type="text" id="grinder" autoComplete="off" class="input input__lg" 
+  />
+  <button type="submit" disabled={false} class="btn btn__primary btn__lg">Submit</button>
 </form>
