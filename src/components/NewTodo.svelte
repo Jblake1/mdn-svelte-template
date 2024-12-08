@@ -20,9 +20,12 @@
   let grinder = ''
   let grinderEl: HTMLElement
 
+  let beanType = ''
+  let beanTypeEl: HTMLElement
+
   const submit = () => {
     // dispatch('addTodo', name)
-    console.log("machine",machine, "type", coffeeType, "grinder",grinder);
+    console.log("machine",machine, "type", coffeeType, "grinder",grinder, "beanType",beanType);
   }
 
   const onCancel = () => {
@@ -54,6 +57,13 @@
   </h2>
   <input bind:value={grinder} bind:this={grinderEl} use:selectOnFocus 
     type="text" id="grinder" autoComplete="off" class="input input__lg" 
+  />
+
+  <h2 class="label-wrapper">
+    <label for="beanType" class="label__lg">Bean Type</label>
+  </h2>
+  <input bind:value={beanType} bind:this={beanTypeEl} use:selectOnFocus 
+    type="text" id="beanType" autoComplete="off" class="input input__lg" 
   />
   <button type="submit" disabled={false} class="btn btn__primary btn__lg">Submit</button>
 </form>
