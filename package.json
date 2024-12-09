@@ -24,6 +24,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "flask": "^0.2.10",
     "sirv-cli": "^0.4.4"
   }
 }

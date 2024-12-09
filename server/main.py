@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import coffee_advisor
 import warnings
 
 warnings.simplefilter("ignore")
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/recommendation', methods=['POST'])
 def parse_json():

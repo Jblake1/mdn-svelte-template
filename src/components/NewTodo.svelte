@@ -23,9 +23,30 @@
   let beanType = ''
   let beanTypeEl: HTMLElement
 
-  const submit = () => {
-    // dispatch('addTodo', name)
-    console.log("machine",machine, "type", coffeeType, "grinder",grinder, "beanType",beanType);
+  const submit = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/recommendation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          machine,
+          coffee_type: coffeeType,
+          grinder,
+          coffee_beans: beanType
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
   }
 
   const onCancel = () => {
