@@ -32,10 +32,6 @@ def parse_json():
 
         # Return the parsed values
         return jsonify({
-            "machine": machine,
-            "coffee_type": coffee_type,
-            "grinder": grinder,
-            "coffee_beans": coffee_beans,
             "advice":advice
         }), 200
     except Exception as e:

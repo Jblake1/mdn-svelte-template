@@ -23,6 +23,15 @@
   let beanType = ''
   let beanTypeEl: HTMLElement
 
+  let advice = ''
+  let adviceEl: HTMLElement
+
+  let brewTime = ''
+  let brewTimeEl: HTMLElement
+
+  let grindSetting = ''
+  let grindSettingEl: HTMLElement
+
   const submit = async () => {
     try {
       const response = await fetch('http://localhost:4000/recommendation', {
@@ -43,7 +52,14 @@
       }
 
       const data = await response.json();
-      console.log(data);
+      console.log('Received data:', data);
+      const advice = data.advice;
+      console.log('Advice:', advice);
+      brewTime = String(advice.brew_time); // Extract and convert "brew_time" to a string
+      console.log('Brew Time:', brewTime);
+      grindSetting = String(advice.grind_setting); // Extract and convert "brew_time" to a string
+      console.log('Grind Setting:', grindSetting);
+
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -51,6 +67,13 @@
 
   const onCancel = () => {
     name = ''
+    machine = '';
+    coffeeType = '';
+    grinder = '';
+    beanType = '';
+    advice = '';
+    brewTime = '';
+    grindSetting = '';
     nameEl.focus()            // give focus to the name input
   }
 
@@ -87,4 +110,11 @@
     type="text" id="beanType" autoComplete="off" class="input input__lg" 
   />
   <button type="submit" disabled={false} class="btn btn__primary btn__lg">Submit</button>
+
+  <h2 class="label-wrapper">
+    <label for="brewTime" class="label__lg">Brew Time</label>
+  </h2>
+  <input bind:value={brewTime} bind:this={brewTimeEl} 
+    type="text" id="brewTime" autoComplete="off" class="input input__lg" readonly 
+  />
 </form>
