@@ -7,30 +7,16 @@
 
   export let autofocus: boolean = false
 
-  let name = ''
-  let nameEl: HTMLElement     // reference to the name input DOM node
+  let machine = '';
+  let coffeeType = '';
+  let grinder = '';
+  let beanType = '';
+  let advice = '';
+  let brewTime = '';
+  let grindSetting = '';
 
+  let machineEl, coffeeTypeEl, grinderEl, beanTypeEl, adviceEl, brewTimeEl, grindSettingEl;
 
-  let machine = ''
-  let machineEl: HTMLElement
-
-  let coffeeType = ''
-  let coffeeTypeEl: HTMLElement
-
-  let grinder = ''
-  let grinderEl: HTMLElement
-
-  let beanType = ''
-  let beanTypeEl: HTMLElement
-
-  let advice = ''
-  let adviceEl: HTMLElement
-
-  let brewTime = ''
-  let brewTimeEl: HTMLElement
-
-  let grindSetting = ''
-  let grindSettingEl: HTMLElement
 
   const submit = async () => {
     try {
@@ -57,7 +43,7 @@
       console.log('Advice:', advice);
       brewTime = String(advice.brew_time); // Extract and convert "brew_time" to a string
       console.log('Brew Time:', brewTime);
-      grindSetting = String(advice.grind_setting); // Extract and convert "brew_time" to a string
+      grindSetting = advice.grind_setting; // Extract and convert "brew_time" to a string
       console.log('Grind Setting:', grindSetting);
 
     } catch (error) {
@@ -80,6 +66,17 @@
   onMount(() => autofocus && nameEl.focus && nameEl.focus())    // if autofocus is true, we run nameEl.focus()
 
 </script>
+
+<style>
+  .visible-heading {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: black !important;
+  font-size: 1.2em !important;
+  margin-top: 1em !important;
+}
+</style>
 
 <form on:submit|preventDefault={submit} on:keydown={e => e.key === 'Escape' && onCancel()}>
   <h2 class="label-wrapper">
@@ -109,12 +106,22 @@
   <input bind:value={beanType} bind:this={beanTypeEl} use:selectOnFocus 
     type="text" id="beanType" autoComplete="off" class="input input__lg" 
   />
-  <button type="submit" disabled={false} class="btn btn__primary btn__lg">Submit</button>
 
   <h2 class="label-wrapper">
-    <label for="brewTime" class="label__lg">Brew Time</label>
+    <label for="grindSetting" class="label__lg">Grind Setting</label>
   </h2>
-  <input bind:value={brewTime} bind:this={brewTimeEl} 
-    type="text" id="brewTime" autoComplete="off" class="input input__lg" readonly 
+  <input bind:value={grindSetting} bind:this={beanTypeEl} use:selectOnFocus 
+    type="text" id="grindSetting" autoComplete="off" class="input input__lg" 
   />
+
+  <h1 class="visible-heading">
+    Grind Setting:{grindSetting}
+  </h1>
+
+  <h1 class="visible-heading">
+    Brew Time:{brewTime}
+  </h1>
+
+  <button type="submit" disabled={false} class="btn btn__primary btn__lg">Submit</button>
+
 </form>
